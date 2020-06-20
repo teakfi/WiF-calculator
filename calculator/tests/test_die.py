@@ -1,21 +1,21 @@
 import pytest
-import dice
+import die
 from math import floor
 
 def test_correctConstruction():
     sides=6
-    D6=dice.Dice(sides)
+    D6=die.Die(sides)
     assert sides == D6.showNumberOfSides()
 
 def test_correctConstructionWithAlphaInput():
     sides="10"
-    D10=dice.Dice(sides)
+    D10=die.Die(sides)
     assert int(sides) == D10.showNumberOfSides()
     
 
 def test_incorrectConstructionNonNumber():
     sides="a"
-    Da=dice.Dice(sides)
+    Da=die.Die(sides)
     notExist = False
     if not Da:
         notExist = True
@@ -23,7 +23,7 @@ def test_incorrectConstructionNonNumber():
 
 def test_incorrectConstructionEmpty():
     sides=""
-    D=dice.Dice(sides)
+    D=die.Die(sides)
     notExist = False
     if not D:
         notExist = True
@@ -32,7 +32,7 @@ def test_incorrectConstructionEmpty():
     
 def test_incorrectConstructionZero():
     sides=0
-    D0=dice.Dice(sides)
+    D0=die.Die(sides)
     notExist = False
     if not D0:
         notExist = True
@@ -40,14 +40,32 @@ def test_incorrectConstructionZero():
 
 def test_incorrectConstructionNegative():
     sides=-10
-    Dminus=dice.Dice(sides)
+    Dminus=die.Die(sides)
     notExist = False
     if not Dminus:
         notExist = True
     assert True == notExist
 
+def test_rollD6():
+    for i in range(1,100):
+        roll=die.rollD6()
+        assert roll>0
+        assert roll<7
     
        
+def test_rollD10():
+    for i in range(1,100):
+        roll=die.rollD10()
+        assert roll>0
+        assert roll<11
+
+def test_roll5D10():
+    rolls=die.rollXDY(5,10)
+    assert len(rolls)==5
+    for roll in rolls:
+        assert roll>0
+        assert roll<11
+
     
     
         
