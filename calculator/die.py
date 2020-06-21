@@ -48,8 +48,48 @@ def rollD6():
     return die.rollDie()
 
 def rollXDY(count,sides):
-    die=Die(sides)
-    result=[]
-    for throw in range(0, count):
-        result.append(die.rollDie())
-    return result
+    try:
+        die=Die(sides)
+        result=[]
+        for throw in range(0, count):
+            result.append(die.rollDie())
+        return result
+    except:
+        print("not a proper dice")
+
+def getXfromY(X,Y,best=True):
+    try:
+        if(X>len(Y)):
+            raise ValueError
+    except:
+        print("asked more values than available")
+        return 0
+    else:
+        if(best==True):
+            Y.sort(reverse=True)
+        else:
+            Y.sort()
+        return Y[:X]
+   
+        
+def getXfromRolls(X,rolls,sides,best=True):
+    try:
+        if(X>rolls):
+            raise ValueError
+    except:
+        print("asked more values than number of dices")
+        return 0
+    else:
+        try:
+            rolled=rollXDY(rolls,sides)
+            return getXfromY(X,rolled,best)
+        except:
+            print("error in rolling")
+        
+def bestXfromRolls(X,rolls,sides):
+    return getXfromRolls(X,rolls,sides,True)
+    
+def worstXfromRolls(X,rolls,sides):
+    return getXfromRolls(X,rolls,sides,False)
+
+            

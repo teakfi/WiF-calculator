@@ -66,7 +66,15 @@ def test_roll5D10():
         assert roll>0
         assert roll<11
 
-    
-    
+def test_best():
+    X=4
+    Y=[2,3,1,4,15,163,3,134,163]
+    result=die.getXfromY(X,Y)
+    correct=[15,163,134,163]
+    assert result.sort()==correct.sort()
         
-
+def test_worst():
+    X=1
+    Y=[1,4,45,1,4,1,534512,543,4,1]
+    result=die.getXfromY(X,Y,False)
+    assert result==[1]
